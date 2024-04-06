@@ -3,20 +3,30 @@
 
 #include "PKH/HttpTestActor.h"
 
+#include "HttpGameMode.h"
 #include "HttpModule.h"
 #include "JsonParserLib.h"
-#include "TestWidget.h"
+#include "Components/SceneCaptureComponent2D.h"
+#include "Engine/TextureRenderTarget2D.h"
 #include "Interfaces/IHttpResponse.h"
+#include "Kismet/KismetRenderingLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values
 AHttpTestActor::AHttpTestActor()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	static ConstructorHelpers::FClassFinder<UTestWidget> TestUIClassRef(TEXT("/Game/PKH/UI/WBP_TestUI.WBP_TestUI_C"));
-	if(TestUIClassRef.Class)
+	USceneComponent* SceneComp = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComp"));
+	SetRootComponent(SceneComp);
+
+	CaptureComp = CreateDefaultSubobject<USceneCaptureComponent2D>(TEXT("CaptureComp"));
+	CaptureComp->SetupAttachment(RootComponent);
+
+	static ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> RenderTargetRef(TEXT("/Script/Engine.TextureRenderTarget2D'/Game/PKH/RenderTarget/RT_Capture.RT_Capture'"));
+	if(RenderTargetRef.Object)
 	{
-		TestUIClass = TestUIClassRef.Class;
+		RenderTarget = RenderTargetRef.Object;
 	}
 }
 
@@ -24,26 +34,34 @@ void AHttpTestActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// UI
-	TestUI = CreateWidget<UTestWidget>(GetWorld(), TestUIClass);
-	if(TestUI)
+	// GameMode
+	GameMode = Cast<AHttpGameMode>(GetWorld()->GetAuthGameMode());
+	if(nullptr == GameMode)
 	{
-		TestUI->AddToViewport();
+		return;
 	}
-
-	FTimerHandle Handle;
-	GetWorldTimerManager().SetTimer(Handle, FTimerDelegate::CreateLambda([this]()
-	{
-		SendImage("http://127.0.0.1:8000/upload_base64");
-	}), 3.0f, false);
 }
 
-void AHttpTestActor::SendImage(const FString& URL)
+void AHttpTestActor::SendImage()
 {
-	// 이미지 파일 경로
-	FString ImageFilePath = TEXT("D:/Projects/AI2ndProjectCCTV/Content/PKH/Images/ScreenShot00295.png"); 
+	// 테스트용 코드
+	// 추후 삭제할 것
+	FRotator TargetRotation = GetActorRotation();
+	TargetRotation.Yaw += 30;
+	if(TargetRotation.Yaw > 360)
+	{
+		TargetRotation.Yaw -= 360;
+	}
+	SetActorRotation(TargetRotation);
 
-	if(false == FPaths::FileExists(ImageFilePath))
+
+	// Get Image File Data
+	const FString FilePath = UKismetSystemLibrary::GetProjectDirectory();
+	const FString FileName = TEXT("SceneCapture.png");
+	UKismetRenderingLibrary::ExportRenderTarget(GetWorld(), RenderTarget, FilePath, FileName);
+
+	const FString ImageFilePath = FilePath + FileName;
+	if (false == FPaths::FileExists(ImageFilePath))
 	{
 		UE_LOG(LogTemp, Error, TEXT("There is no file: %s"), *ImageFilePath);
 		return;
@@ -56,28 +74,28 @@ void AHttpTestActor::SendImage(const FString& URL)
 	// 이미지를 Base64로 인코딩
 	FString Base64Image = FBase64::Encode(ImageData);
 
-	// HTTP 요청 만들기
+	// HTTP Request
 	TSharedRef<IHttpRequest> HttpRequest = FHttpModule::Get().CreateRequest();
 	HttpRequest->SetVerb(TEXT("POST"));
-	HttpRequest->SetURL(URL);
+	HttpRequest->SetURL(UploadURL);
 	HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/json"));
 	HttpRequest->OnProcessRequestComplete().BindUObject(this, &AHttpTestActor::SendImageComplete);
 
 	// JSON body에 Base64 이미지 추가
+	// 양식 주의할 것(웹 서버쪽의 양식과 정확하게 일치해야 함)
 	FString JsonBody = FString::Printf(TEXT("{\"image_base64\": \"%s\"}"), *Base64Image);
 	HttpRequest->SetContentAsString(JsonBody);
 
-	// 요청 보내기
 	HttpRequest->ProcessRequest();
 
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *URL);
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *UploadURL);
 }
 
 void AHttpTestActor::SendImageComplete(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccessfully)
 {
 	if (bConnectedSuccessfully)
 	{
-		ReqTextData("http://127.0.0.1:8000/get_base64");
+		ReqTextData();
 	}
 	else
 	{
@@ -88,7 +106,7 @@ void AHttpTestActor::SendImageComplete(FHttpRequestPtr Request, FHttpResponsePtr
 	}
 }
 
-void AHttpTestActor::ReqTextData(const FString& URL)
+void AHttpTestActor::ReqTextData()
 {
 	// Request Data from web server(URL)
 	// 1. HttpModule를 가져오고
@@ -97,7 +115,7 @@ void AHttpTestActor::ReqTextData(const FString& URL)
 	TSharedPtr<IHttpRequest> Req = httpModule.CreateRequest();
 	// 3. 요청 객체에 요청할 값을 설정하고
 	//  3.1 어디에 보낼것인가?
-	Req->SetURL(URL);
+	Req->SetURL(GetURL);
 	//  3.2 어떻게 보낼것인가?? GET / POST
 	Req->SetVerb(TEXT("GET"));
 	//  3.3 어떤 Content-Type으로 할것인가?
@@ -127,7 +145,7 @@ void AHttpTestActor::ResTextData(FHttpRequestPtr Request, FHttpResponsePtr Respo
 		UE_LOG(LogTemp, Log, TEXT("MarioHat: %d"), ResultData.MarioHat);
 		UE_LOG(LogTemp, Log, TEXT("SantaHat: %d"), ResultData.SantaHat);
 
-		TestUI->UpdateDetectionUI(ResultData);
+		GameMode->UpdateDetectionData(ResultData);
 	}
 	else
 	{

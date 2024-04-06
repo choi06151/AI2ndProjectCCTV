@@ -7,7 +7,7 @@
 #include "Interfaces/IHttpRequest.h"
 #include "HttpTestActor.generated.h"
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FDetectionData
 {
 	GENERATED_BODY()
@@ -35,19 +35,34 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-// Request & Response
+// Component
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<class USceneCaptureComponent2D> CaptureComp;
+
+// Request & Response6
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	FString UploadURL = TEXT("http://127.0.0.1:8000/upload_base64");
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	FString GetURL = TEXT("http://127.0.0.1:8000/get_base64");
+
 public:
-	void SendImage(const FString& URL);
+	UFUNCTION(BlueprintCallable)
+	void SendImage();
 	void SendImageComplete(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccessfully);
 
-	void ReqTextData(const FString& URL);
+	void ReqTextData();
 	void ResTextData(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccessfully);
 
-// UI
 protected:
 	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<class UTestWidget> TestUIClass;
+	TObjectPtr<class AHttpGameMode> GameMode;
 
+// Texture
+protected:
 	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<class UTestWidget> TestUI;
+	TObjectPtr<class UTextureRenderTarget2D> RenderTarget;
+
 };
