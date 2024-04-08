@@ -37,12 +37,6 @@ void AHttpGameMode::BeginPlay()
 	{
 		TestUI->AddToViewport();
 	}
-
-	/*FTimerHandle Handle;
-	GetWorldTimerManager().SetTimer(Handle, FTimerDelegate::CreateLambda([this]()
-	{
-		Detect();
-	}), 5.0f, true, 5.0f);*/
 }
 
 void AHttpGameMode::Detect()
