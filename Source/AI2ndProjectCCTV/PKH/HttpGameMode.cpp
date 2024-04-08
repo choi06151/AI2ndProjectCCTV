@@ -5,6 +5,7 @@
 
 #include "TestWidget.h"
 #include "Blueprint/UserWidget.h"
+#include "GameFramework/Character.h"
 
 AHttpGameMode::AHttpGameMode()
 {
@@ -15,6 +16,7 @@ AHttpGameMode::AHttpGameMode()
 		HttpActorClass = HttpActorClassRef.Class;
 	}
 
+	// UI
 	static ConstructorHelpers::FClassFinder<UTestWidget> TestUIClassRef(TEXT("/Game/PKH/UI/WBP_TestUI.WBP_TestUI_C"));
 	if (TestUIClassRef.Class)
 	{
@@ -28,8 +30,6 @@ void AHttpGameMode::BeginPlay()
 
 	// Spawn Http Actor 
 	HttpActor = GetWorld()->SpawnActor<AHttpTestActor>(HttpActorClass, FVector(-500, 1350, 92), FRotator::ZeroRotator);
-	GetWorld()->SpawnActor<AHttpTestActor>(HttpActorClass, FVector(-500, 800, 92), FRotator::ZeroRotator);
-	GetWorld()->SpawnActor<AHttpTestActor>(HttpActorClass, FVector(-500, 1850, 92), FRotator::ZeroRotator);
 
 	// UI
 	TestUI = CreateWidget<UTestWidget>(GetWorld(), TestUIClass);
@@ -38,11 +38,11 @@ void AHttpGameMode::BeginPlay()
 		TestUI->AddToViewport();
 	}
 
-	FTimerHandle Handle;
+	/*FTimerHandle Handle;
 	GetWorldTimerManager().SetTimer(Handle, FTimerDelegate::CreateLambda([this]()
 	{
 		Detect();
-	}), 5.0f, true, 5.0f);
+	}), 5.0f, true, 5.0f);*/
 }
 
 void AHttpGameMode::Detect()

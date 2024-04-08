@@ -45,19 +45,6 @@ void AHttpTestActor::BeginPlay()
 
 void AHttpTestActor::SendImage()
 {
-	// 테스트용 코드
-	// 추후 삭제할 것
-	FRotator TargetRotation = GetActorRotation();
-	TargetRotation.Yaw += 30;
-	if(TargetRotation.Yaw > 360)
-	{
-		TargetRotation.Yaw -= 360;
-	}
-	SetActorRotation(TargetRotation);
-
-	// Capture manually
-	CaptureComp->CaptureScene();
-
 	// Get Image File Data
 	const FString FilePath = UKismetSystemLibrary::GetProjectDirectory();
 	const FString FileName = TEXT("SceneCapture.png");
