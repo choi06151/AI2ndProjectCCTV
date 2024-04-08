@@ -28,6 +28,8 @@ void AHttpGameMode::BeginPlay()
 
 	// Spawn Http Actor 
 	HttpActor = GetWorld()->SpawnActor<AHttpTestActor>(HttpActorClass, FVector(-500, 1350, 92), FRotator::ZeroRotator);
+	GetWorld()->SpawnActor<AHttpTestActor>(HttpActorClass, FVector(-500, 800, 92), FRotator::ZeroRotator);
+	GetWorld()->SpawnActor<AHttpTestActor>(HttpActorClass, FVector(-500, 1850, 92), FRotator::ZeroRotator);
 
 	// UI
 	TestUI = CreateWidget<UTestWidget>(GetWorld(), TestUIClass);

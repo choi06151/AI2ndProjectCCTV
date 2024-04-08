@@ -22,6 +22,7 @@ AHttpTestActor::AHttpTestActor()
 
 	CaptureComp = CreateDefaultSubobject<USceneCaptureComponent2D>(TEXT("CaptureComp"));
 	CaptureComp->SetupAttachment(RootComponent);
+	CaptureComp->bCaptureEveryFrame = false;
 
 	static ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> RenderTargetRef(TEXT("/Script/Engine.TextureRenderTarget2D'/Game/PKH/RenderTarget/RT_Capture.RT_Capture'"));
 	if(RenderTargetRef.Object)
@@ -54,6 +55,8 @@ void AHttpTestActor::SendImage()
 	}
 	SetActorRotation(TargetRotation);
 
+	// Capture manually
+	CaptureComp->CaptureScene();
 
 	// Get Image File Data
 	const FString FilePath = UKismetSystemLibrary::GetProjectDirectory();

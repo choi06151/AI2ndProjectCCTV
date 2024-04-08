@@ -18,35 +18,7 @@ class AI2NDPROJECTCCTV_API UTestWidget : public UUserWidget
 protected:
 	// Hat
 	UPROPERTY(EditDefaultsOnly, meta =(BindWidget))
-	TObjectPtr<class UTextBlock> Txt_BlueCap;
-
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	TObjectPtr<class UTextBlock> Txt_CowboyHat;
-
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	TObjectPtr<class UTextBlock> Txt_GentleHat;
-
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	TObjectPtr<class UTextBlock> Txt_MarioHat;
-
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	TObjectPtr<class UTextBlock> Txt_SantaHat;
-
-	// Weapon
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	TObjectPtr<class UTextBlock> Txt_Axe;
-
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	TObjectPtr<class UTextBlock> Txt_Dagger;
-
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	TObjectPtr<class UTextBlock> Txt_GreatSword;
-
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	TObjectPtr<class UTextBlock> Txt_Gun;
-
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	TObjectPtr<class UTextBlock> Txt_LaserBlade;
+	TObjectPtr<class UTextBlock> Txt_DetectionResult;
 
 public:
 	void UpdateDetectionUI(const FDetectionData& Data);
