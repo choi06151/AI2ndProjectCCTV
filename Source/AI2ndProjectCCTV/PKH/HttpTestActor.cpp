@@ -124,17 +124,6 @@ void AHttpTestActor::ResTextData(FHttpRequestPtr Request, FHttpResponsePtr Respo
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *ResultString);
 
 		FDetectionData ResultData = UJsonParserLib::JsonParse(ResultString);
-		UE_LOG(LogTemp, Log, TEXT("Axe: %d"), ResultData.Axe);
-		UE_LOG(LogTemp, Log, TEXT("BlueCap: %d"), ResultData.BlueCap);
-		UE_LOG(LogTemp, Log, TEXT("CowboyHat: %d"), ResultData.CowboyHat);
-		UE_LOG(LogTemp, Log, TEXT("Dagger: %d"), ResultData.Dagger);
-		UE_LOG(LogTemp, Log, TEXT("GentleHat: %d"), ResultData.GentleHat);
-		UE_LOG(LogTemp, Log, TEXT("GreatSword: %d"), ResultData.GreatSword);
-		UE_LOG(LogTemp, Log, TEXT("Gun: %d"), ResultData.Gun);
-		UE_LOG(LogTemp, Log, TEXT("LaserBlade: %d"), ResultData.LaserBlade);
-		UE_LOG(LogTemp, Log, TEXT("MarioHat: %d"), ResultData.MarioHat);
-		UE_LOG(LogTemp, Log, TEXT("SantaHat: %d"), ResultData.SantaHat);
-
 		GameMode->UpdateDetectionData(ResultData);
 	}
 	else
