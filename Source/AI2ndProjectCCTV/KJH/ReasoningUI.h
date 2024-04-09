@@ -264,6 +264,8 @@ public:
 	UFUNCTION()
 	void OnMyCount();
 
+	void SaveButtonClickCounts();
+	void LoadButtonClickCounts();
 private:
 	void UpdateButtonTextAndState(UButton* Button, UTextBlock* TextBlock, int32& ClickCount);
 };

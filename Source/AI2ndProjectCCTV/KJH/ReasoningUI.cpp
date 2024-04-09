@@ -6,6 +6,8 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
+#include "Kismet/GameplayStatics.h"
+#include "Public/KJH/UISaveGame.h"
 
 const int SWITCHER_INDEX_COUNT = 0;
 const int SWITCHER_INDEX_CHECK = 1;
@@ -13,6 +15,9 @@ const int SWITCHER_INDEX_CHECK = 1;
 void UReasoningUI::NativeConstruct()
 {
 	Super::NativeConstruct();
+
+	// UI 로딩 시점에서 상태 복원
+	LoadButtonClickCounts();
 
 	Btn_Blue1->OnClicked.AddDynamic(this, &UReasoningUI::OnBtnBlue1Clicked);
 	Btn_Blue2->OnClicked.AddDynamic(this, &UReasoningUI::OnBtnBlue2Clicked);
@@ -45,156 +50,181 @@ void UReasoningUI::NativeConstruct()
 
 
 
-	Blue1ClickCount = 0;
-	Blue2ClickCount = 0;
-	Blue3ClickCount = 0;
-	Blue4ClickCount = 0;
-	Blue5ClickCount = 0;
-	Cow1ClickCount = 0;
-	Cow2ClickCount = 0;
-	Cow3ClickCount = 0;
-	Cow4ClickCount = 0;
-	Cow5ClickCount = 0;
-	Gentle1ClickCount = 0;
-	Gentle2ClickCount = 0;
-	Gentle3ClickCount = 0;
-	Gentle4ClickCount = 0;
-	Gentle5ClickCount = 0;
-	Mario1ClickCount = 0;
-	Mario2ClickCount = 0;
-	Mario3ClickCount = 0;
-	Mario4ClickCount = 0;
-	Mario5ClickCount = 0;
-	Santa1ClickCount = 0;
-	Santa2ClickCount = 0;
-	Santa3ClickCount = 0;
-	Santa4ClickCount = 0;
-	Santa5ClickCount = 0;
+	//Blue1ClickCount = 0;
+	//Blue2ClickCount = 0;
+	//Blue3ClickCount = 0;
+	//Blue4ClickCount = 0;
+	//Blue5ClickCount = 0;
+	//Cow1ClickCount = 0;
+	//Cow2ClickCount = 0;
+	//Cow3ClickCount = 0;
+	//Cow4ClickCount = 0;
+	//Cow5ClickCount = 0;
+	//Gentle1ClickCount = 0;
+	//Gentle2ClickCount = 0;
+	//Gentle3ClickCount = 0;
+	//Gentle4ClickCount = 0;
+	//Gentle5ClickCount = 0;
+	//Mario1ClickCount = 0;
+	//Mario2ClickCount = 0;
+	//Mario3ClickCount = 0;
+	//Mario4ClickCount = 0;
+	//Mario5ClickCount = 0;
+	//Santa1ClickCount = 0;
+	//Santa2ClickCount = 0;
+	//Santa3ClickCount = 0;
+	//Santa4ClickCount = 0;
+	//Santa5ClickCount = 0;
 }
 
 void UReasoningUI::OnBtnBlue1Clicked()
 {
 	UpdateButtonTextAndState(Btn_Blue1, Txt_Blue1, Blue1ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnBlue2Clicked()
 {
 	UpdateButtonTextAndState(Btn_Blue2, Txt_Blue2, Blue2ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnBlue3Clicked()
 {
 	UpdateButtonTextAndState(Btn_Blue3, Txt_Blue3, Blue3ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnBlue4Clicked()
 {
 	UpdateButtonTextAndState(Btn_Blue4, Txt_Blue4, Blue4ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnBlue5Clicked()
 {
 	UpdateButtonTextAndState(Btn_Blue5, Txt_Blue5, Blue5ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnCow1Clicked()
 {
 	UpdateButtonTextAndState(Btn_Cow1, Txt_Cow1, Cow1ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnCow2Clicked()
 {
 	UpdateButtonTextAndState(Btn_Cow2, Txt_Cow2, Cow2ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnCow3Clicked()
 {
 	UpdateButtonTextAndState(Btn_Cow3, Txt_Cow3, Cow3ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnCow4Clicked()
 {
 	UpdateButtonTextAndState(Btn_Cow4, Txt_Cow4, Cow4ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnCow5Clicked()
 {
 	UpdateButtonTextAndState(Btn_Cow5, Txt_Cow5, Cow5ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnGentle1Clicked()
 {
 	UpdateButtonTextAndState(Btn_Gentle1, Txt_Gentle1, Gentle1ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnGentle2Clicked()
 {
 	UpdateButtonTextAndState(Btn_Gentle2, Txt_Gentle2, Gentle2ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnGentle3Clicked()
 {
 	UpdateButtonTextAndState(Btn_Gentle3, Txt_Gentle3, Gentle3ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnGentle4Clicked()
 {
 	UpdateButtonTextAndState(Btn_Gentle4, Txt_Gentle4, Gentle4ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnGentle5Clicked()
 {
 	UpdateButtonTextAndState(Btn_Gentle5, Txt_Gentle5, Gentle5ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnMario1Clicked()
 {
 	UpdateButtonTextAndState(Btn_Mario1, Txt_Mario1, Mario1ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnMario2Clicked()
 {
 	UpdateButtonTextAndState(Btn_Mario2, Txt_Mario2, Mario2ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnMario3Clicked()
 {
 	UpdateButtonTextAndState(Btn_Mario3, Txt_Mario3, Mario3ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnMario4Clicked()
 {
 	UpdateButtonTextAndState(Btn_Mario4, Txt_Mario4, Mario4ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnMario5Clicked()
 {
 	UpdateButtonTextAndState(Btn_Mario5, Txt_Mario5, Mario5ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnSanta1Clicked()
 {
 	UpdateButtonTextAndState(Btn_Santa1, Txt_Santa1, Santa1ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnSanta2Clicked()
 {
 	UpdateButtonTextAndState(Btn_Santa2, Txt_Santa2, Santa2ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnSanta3Clicked()
 {
 	UpdateButtonTextAndState(Btn_Santa3, Txt_Santa3, Santa3ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnSanta4Clicked()
 {
 	UpdateButtonTextAndState(Btn_Santa4, Txt_Santa4, Santa4ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::OnBtnSanta5Clicked()
 {
 	UpdateButtonTextAndState(Btn_Santa5, Txt_Santa5, Santa5ClickCount);
+	SaveButtonClickCounts();
 }
 
 void UReasoningUI::SwitchPanel(int32 index)
@@ -210,6 +240,74 @@ void UReasoningUI::OnMyCheck()
 void UReasoningUI::OnMyCount()
 {
 	SwitchPanel(SWITCHER_INDEX_COUNT);
+}
+
+void UReasoningUI::SaveButtonClickCounts()
+{
+	UUISaveGame* SaveGameInstance = Cast<UUISaveGame>(UGameplayStatics::CreateSaveGameObject(UUISaveGame::StaticClass()));
+	
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Blue1", Blue1ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Blue2", Blue2ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Blue3", Blue3ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Blue4", Blue4ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Blue5", Blue5ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Cow1", Cow1ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Cow2", Cow2ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Cow3", Cow3ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Cow4", Cow4ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Cow5", Cow5ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Gentle1", Gentle1ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Gentle2", Gentle2ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Gentle3", Gentle3ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Gentle4", Gentle4ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Gentle5", Gentle5ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Mario1", Mario1ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Mario2", Mario2ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Mario3", Mario3ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Mario4", Mario4ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Mario5", Mario5ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Santa1", Santa1ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Santa2", Santa2ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Santa3", Santa3ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Santa4", Santa4ClickCount);
+	SaveGameInstance->ButtonClickCounts.Add("Btn_Santa5", Santa5ClickCount);
+	
+	UGameplayStatics::SaveGameToSlot(SaveGameInstance, "MySaveSlot", 0);
+}
+
+void UReasoningUI::LoadButtonClickCounts()
+{
+	if (UGameplayStatics::DoesSaveGameExist("MySaveSlot", 0))
+	{
+		UUISaveGame* LoadGameInstance = Cast<UUISaveGame>(UGameplayStatics::LoadGameFromSlot("MySaveSlot", 0));
+		// SaveGame 객체에서 버튼 클릭 카운트를 불러옴
+		Blue1ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Blue1"];
+		Blue2ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Blue2"];
+		Blue3ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Blue3"];
+		Blue4ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Blue4"];
+		Blue5ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Blue5"];
+		Cow1ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Cow1"];
+		Cow2ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Cow2"];
+		Cow3ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Cow3"];
+		Cow4ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Cow4"];
+		Cow5ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Cow5"];
+		Gentle1ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Gentle1"];
+		Gentle2ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Gentle2"];
+		Gentle3ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Gentle3"];
+		Gentle4ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Gentle4"];
+		Gentle5ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Gentle5"];
+		Mario1ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Mario1"];
+		Mario2ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Mario2"];
+		Mario3ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Mario3"];
+		Mario4ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Mario4"];
+		Mario5ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Mario5"];
+		Santa1ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Santa1"];
+		Santa2ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Santa2"];
+		Santa3ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Santa3"];
+		Santa4ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Santa4"];
+		Santa5ClickCount = LoadGameInstance->ButtonClickCounts["Btn_Santa5"];
+
+	}
 }
 
 void UReasoningUI::UpdateButtonTextAndState(UButton* Button, UTextBlock* TextBlock, int32& ClickCount)
