@@ -125,6 +125,7 @@ void AHttpTestActor::ResTextData(FHttpRequestPtr Request, FHttpResponsePtr Respo
 
 		FDetectionData ResultData = UJsonParserLib::JsonParse(ResultString);
 		GameMode->UpdateDetectionData(ResultData);
+		GameMode->UpdateReliabilityData();
 	}
 	else
 	{

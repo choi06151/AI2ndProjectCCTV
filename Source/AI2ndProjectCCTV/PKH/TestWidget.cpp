@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PKH/TestWidget.h"
@@ -29,4 +29,13 @@ void UTestWidget::UpdateDetectionUI(const FDetectionData& Data)
 	Result.Append(Data.LaserBlade > 0 ? FString::Printf(TEXT("LaserBlade : %d\n"), Data.LaserBlade) : "");
 
 	Txt_DetectionResult->SetText(FText::FromString(Result));
+}
+
+void UTestWidget::UpdateReliabilityUI(bool IsReliable)
+{
+	const FText Reliability = IsReliable ? FText::FromString(TEXT("검출 정상")) : FText::FromString(TEXT("검출 비정상"));
+	Txt_Reliability->SetText(Reliability);
+
+	const FSlateColor FontColor = IsReliable ? FSlateColor(FColor::Green) : FSlateColor(FColor::Red);
+	Txt_Reliability->SetColorAndOpacity(FontColor);
 }

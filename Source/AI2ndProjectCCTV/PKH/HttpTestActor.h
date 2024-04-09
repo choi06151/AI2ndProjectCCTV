@@ -12,15 +12,34 @@ struct FDetectionData
 {
 	GENERATED_BODY()
 
+	UPROPERTY(BlueprintReadOnly)
 	uint8 Axe;
+
+	UPROPERTY(BlueprintReadOnly)
 	uint8 BlueCap;
+
+	UPROPERTY(BlueprintReadOnly)
 	uint8 CowboyHat;
+
+	UPROPERTY(BlueprintReadOnly)
 	uint8 Dagger;
+
+	UPROPERTY(BlueprintReadOnly)
 	uint8 GentleHat;
+
+	UPROPERTY(BlueprintReadOnly)
 	uint8 GreatSword;
+
+	UPROPERTY(BlueprintReadOnly)
 	uint8 Gun;
+
+	UPROPERTY(BlueprintReadOnly)
 	uint8 LaserBlade;
+
+	UPROPERTY(BlueprintReadOnly)
 	uint8 MarioHat;
+
+	UPROPERTY(BlueprintReadOnly)
 	uint8 SantaHat;
 };
 

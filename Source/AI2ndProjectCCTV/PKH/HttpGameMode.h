@@ -32,6 +32,7 @@ protected:
 
 // ΐ₯ Ελ½Ε
 protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FDetectionData CurDetectionData;
 
 public:
@@ -41,6 +42,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateDetectionData(FDetectionData ResultData);
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void UpdateReliabilityData();
+
 	FORCEINLINE FDetectionData GetDetectionData() const { return CurDetectionData; }
 
 // UI
@@ -48,6 +52,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<class UTestWidget> TestUIClass;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	TObjectPtr<class UTestWidget> TestUI;
 };
