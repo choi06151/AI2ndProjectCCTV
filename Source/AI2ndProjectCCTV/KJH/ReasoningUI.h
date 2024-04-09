@@ -266,6 +266,62 @@ public:
 
 	void SaveButtonClickCounts();
 	void LoadButtonClickCounts();
+
+	void UpdateButtonText(UTextBlock* TextBlock, int32 ClickCount);
+
+	void ResetButtonClickCounts();
+
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UButton* Btn_AllBlue;
+
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UButton* Btn_AllCow;
+
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UButton* Btn_AllGentle;
+
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UButton* Btn_AllMario;
+
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UButton* Btn_AllSanta;
+
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UButton* Btn_AllAxe;
+
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UButton* Btn_AllBlade;
+
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UButton* Btn_AllDagger;
+
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UButton* Btn_AllGreat;
+
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UButton* Btn_AllGun;
+
+	UFUNCTION()
+	void OnBtnAllBlueClicked();
+	UFUNCTION()
+	void OnBtnAllCowClicked();
+	UFUNCTION()
+	void OnBtnAllGentleClicked();
+	UFUNCTION()
+	void OnBtnAllMarioClicked();
+	UFUNCTION()
+	void OnBtnAllSantaClicked();
+	UFUNCTION()
+	void OnBtnAllAxeClicked();
+	UFUNCTION()
+	void OnBtnAllBladeClicked();
+	UFUNCTION()
+	void OnBtnAllDaggerClicked();
+	UFUNCTION()
+	void OnBtnAllGreatClicked();
+	UFUNCTION()
+	void OnBtnAllGunClicked();
+
 private:
 	void UpdateButtonTextAndState(UButton* Button, UTextBlock* TextBlock, int32& ClickCount);
 };
