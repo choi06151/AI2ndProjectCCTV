@@ -18,7 +18,7 @@ void UReasoningUI::NativeConstruct()
 
 	//ResetButtonClickCounts();
 	//SaveButtonClickCounts();
-	LoadButtonClickCounts();
+	//LoadButtonClickCounts();
 
 	Btn_Blue1->OnClicked.AddDynamic(this, &UReasoningUI::OnBtnBlue1Clicked);
 	Btn_Blue2->OnClicked.AddDynamic(this, &UReasoningUI::OnBtnBlue2Clicked);
